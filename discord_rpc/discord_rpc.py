@@ -4,6 +4,7 @@ from krita import Extension
 from .presence import Presence
 import time
 import PyQt5.QtCore
+from os.path import basename
 
 DISCORD_RPC_CLIENT_ID = '744403269237080127'  # '541005130749968405'  # App ID. Change if you want
 EXTENSION_ID = 'pykrita_discord_rpc'
@@ -33,7 +34,7 @@ class DiscordRpc(Extension):
                     self.time = time.time()
                 if self.file != Krita.instance().activeDocument().fileName():
                     RPC.update(details="Drawing something cool!",
-                               state=str(Krita.instance().activeDocument().name()) or "Unnamed",
+                               state=basename(Krita.instance().activeDocument().fileName()) or "Unnamed",
                                large_image="krita_logo", 
                                start=int(self.time),
                                large_text=self.version )
